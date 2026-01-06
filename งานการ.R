@@ -1,0 +1,15 @@
+install.packages("ISLR") 
+install.packages("MASS")
+install.packages("caret")
+library(ISLR)
+library(MASS)
+library(caret)
+
+setwd("C:/Users/User 56/Downloads")
+train = read.csv("trainset.csv", stringsAsFactors = T, header = T)
+test = read.csv("testset.csv", stringsAsFactors = T, header = T)
+train$Churn = as.factor(train$Churn)
+
+fit.LDA = lda(Churn~., data = train)
+predict.lda <- predict(fit.LDA, newdata = test)
+write.csv(predict.lda,"submission.csv")
